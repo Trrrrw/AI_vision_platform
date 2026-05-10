@@ -1,9 +1,0 @@
-[server]
-enableCORS = true
-enableXsrfProtection = true
-maxConcurrentConversations = 50
-maxUploadSize = 200
-
-[server.runner]
-runnerType = "threading"
-numWorkers = 4
