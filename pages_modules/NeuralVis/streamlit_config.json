@@ -1,0 +1,11 @@
+{
+  "input_size": 2,
+  "hidden_layers": [
+    17,
+    8
+  ],
+  "output_size": 1,
+  "activation": "relu",
+  "loss_type": "cross_entropy",
+  "lr": 0.01
+}
