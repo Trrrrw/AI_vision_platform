@@ -589,7 +589,10 @@ def nv_render_cnn_viz():
     """渲染 CNN 交互教学页面。"""
     st.title("卷积神经网络（CNN）")
     st.caption("交互式探索卷积核滑动与池化压缩的核心机制")
-
+    st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
     # ---- 为什么需要它 ----
     st.subheader("为什么需要它？")
     st.info(

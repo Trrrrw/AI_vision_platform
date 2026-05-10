@@ -16,6 +16,10 @@ def show():
     </div>
     """, unsafe_allow_html=True)
 
+    st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
     st.markdown("<div style='margin-top: 1.5rem;'></div>", unsafe_allow_html=True)
 
     # 快速引导

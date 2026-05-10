@@ -132,6 +132,11 @@ def show(model_preselected: str = None):
     """国产大模型对话页面（控件移至主界面）"""
     st.title("🤖 国产大模型体验区")
     st.markdown("了解模型背景，然后输入问题，体验国产AI的能力。")
+    st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
+
 
     # 初始化会话状态
     if "llm_messages" not in st.session_state:

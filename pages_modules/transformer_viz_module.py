@@ -473,6 +473,10 @@ def nv_render_transformer_viz():
     st.title("注意力机制网络（Transformer）")
     st.caption("不再按顺序传递记忆，而是让所有位置直接建立关联")
 
+    st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
     st.subheader("为什么需要它？")
     st.info(
         "RNN 需要逐步递推，长距离依赖会在多步传递中衰减。"

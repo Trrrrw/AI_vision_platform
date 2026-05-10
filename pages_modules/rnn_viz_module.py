@@ -621,6 +621,10 @@ def nv_render_rnn_viz():
     st.title("循环神经网络 (RNN)")
     st.caption("给神经网络装上短期记忆，让它能理解序列中的先后关系")
 
+    st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
     st.subheader("为什么需要它？")
     st.info(
         "基础神经网络通常把样本视为独立输入，但文本、语音、时间序列的语义依赖前后文。"

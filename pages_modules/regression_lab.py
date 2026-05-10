@@ -44,6 +44,10 @@ def render_regression_lab():
     dataset_info = dataset_overview(dataset_key)
 
     st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
+    st.markdown(
         """
         <div class="lab-hero">
             <div class="lab-overline">机器学习 · 回归</div>

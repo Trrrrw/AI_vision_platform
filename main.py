@@ -79,7 +79,7 @@ with st.sidebar:
         new_page = page_map[ml_selected]
         if st.session_state.current_page != new_page:
             st.session_state.current_page = new_page
-            st.rerun()
+            # st.rerun()
 
     # 神经网络模块（仅保留四个板块）
     st.markdown('<div class="sidebar-header" style="margin-top: 20px;">🧬 神经网络动画展示</div>', unsafe_allow_html=True)
@@ -113,7 +113,7 @@ with st.sidebar:
         new_page = nn_page_map[nn_selected]
         if st.session_state.current_page != new_page:
             st.session_state.current_page = new_page
-            st.rerun()
+            # st.rerun()
 
     # 国产大模型模块
     st.markdown('<div class="sidebar-header" style="margin-top: 20px;">🤖 国产大模型</div>', unsafe_allow_html=True)
@@ -142,13 +142,12 @@ with st.sidebar:
         new_page = llm_page_map[llm_selected]
         if st.session_state.current_page != new_page:
             st.session_state.current_page = new_page
-            st.rerun()
+            # st.rerun()
 
     # 返回首页按钮（保留，方便操作）
     st.markdown("---")
-    if st.button("🏠 返回首页", use_container_width=True):
-        st.session_state.current_page = "home"
-        st.rerun()
+    st.markdown('<a href="/" target="_self" style="text-decoration:none; color:#1A7EC1;">🏠 返回首页</a>', unsafe_allow_html=True)
+        # st.rerun()
 
     # 校训
     st.markdown("---")

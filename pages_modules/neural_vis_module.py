@@ -666,7 +666,10 @@ def _init_session_state():
 def render_neural_network_viz():
     """渲染完整的神经网络可视化训练界面。主入口函数。"""
     _init_session_state()
-
+    st.markdown(
+        '<a href="/" target="_self" style="text-decoration:none; font-size:14px; color:#1A7EC1;">🏠 返回首页</a>',
+        unsafe_allow_html=True)
+    st.markdown("---")
     # 页面标题与说明
     st.markdown("""
     <div style="margin-bottom: 8px;">
