@@ -24,7 +24,13 @@ from matplotlib.patches import Circle
 
 # ==================== 兼容 EXE 打包的中文字体设置 ====================
 matplotlib.rcParams["font.sans-serif"] = [
-    "Noto Sans CJK SC", "WenQuanYi Micro Hei", "SimHei", "Microsoft YaHei", "Arial Unicode MS"
+    "Noto Sans CJK SC",
+    "Noto Sans CJK JP",
+    "WenQuanYi Micro Hei",
+    "SimHei",
+    "Microsoft YaHei",
+    "Arial Unicode MS",
+    "sans-serif"
 ]
 matplotlib.rcParams["axes.unicode_minus"] = False
 

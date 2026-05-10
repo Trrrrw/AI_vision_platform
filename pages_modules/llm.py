@@ -198,7 +198,10 @@ def show(model_preselected: str = None):
     if not api_key:
         st.error(f"❌ 未配置 {model_choice} 的 API Key。请在 `.streamlit/secrets.toml` 中添加。")
         st.info(f"💡 申请免费 API Key：访问 {intro['website']} 注册即可获取。")
-        st.stop()
+        # st.stop()
+        st.markdown("---")
+        st.markdown('<a href="/" target="_self" style="...">🏠 返回首页</a>', ...)
+        return False  # 直接返回，不执行后面的对话逻辑
 
     client = OpenAI(
         api_key=api_key,
