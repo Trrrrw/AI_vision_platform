@@ -18,34 +18,39 @@ _FUTURE = (70, 70, 70)
 
 
 def _load_font(size: int):
-    candidates = [
-        "msyh.ttc",  # Microsoft YaHei (中文)
-        "msyhbd.ttc",
-        "simhei.ttf",
-        "simsun.ttc",
-        "arialuni.ttf",
-        "arial.ttf",
+    """跨平台字体加载，优先使用 Linux / Streamlit Cloud 可用的中文字体"""
+    font_paths = [
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "C:/Windows/Fonts/msyh.ttc",
+        "C:/Windows/Fonts/simhei.ttf",
+        "C:/Windows/Fonts/simsun.ttc",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
     ]
-    windows_font_dir = os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts")
-    for name in candidates:
-        try:
-            return ImageFont.truetype(name, size)
-        except Exception:
-            font_path = os.path.join(windows_font_dir, name)
+    for path in font_paths:
+        if os.path.exists(path):
             try:
-                return ImageFont.truetype(font_path, size)
+                return ImageFont.truetype(path, size=size)
             except Exception:
                 continue
     return ImageFont.load_default()
 
 
 def _load_font_bold(size: int):
-    """标题加粗（微软雅黑粗体）；失败时回退 `_load_font`，保证中文可读。"""
-    win = os.path.join(os.environ.get("WINDIR", "C:\\Windows"), "Fonts", "msyhbd.ttc")
-    try:
-        return ImageFont.truetype(win, size)
-    except Exception:
-        return _load_font(size)
+    """标题加粗；失败时回退 `_load_font`，保证中文可读。"""
+    bold_paths = [
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "C:/Windows/Fonts/msyhbd.ttc",
+    ]
+    for path in bold_paths:
+        if os.path.exists(path):
+            try:
+                return ImageFont.truetype(path, size=size)
+            except Exception:
+                continue
+    return _load_font(size)
 
 
 def _draw_arrow(draw: ImageDraw.ImageDraw, p0: tuple, p1: tuple, color=(150, 150, 150), width=2, head_len: Optional[int] = None):

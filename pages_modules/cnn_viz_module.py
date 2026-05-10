@@ -10,7 +10,33 @@ import numpy as np
 import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 
+# ===================== 跨平台字体加载 =====================
+import os as _os
 
+def _load_font(size, bold=False):
+    """跨平台字体加载，优先使用 Linux / Streamlit Cloud 可用的中文字体"""
+    font_paths = [
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "C:/Windows/Fonts/msyh.ttc",
+        "C:/Windows/Fonts/simhei.ttf",
+        "C:/Windows/Fonts/simsun.ttc",
+    ]
+    if bold:
+        bold_paths = [
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+            "C:/Windows/Fonts/msyhbd.ttc",
+        ]
+        font_paths = bold_paths + font_paths
+    for path in font_paths:
+        if _os.path.exists(path):
+            try:
+                return ImageFont.truetype(path, size=size)
+            except Exception:
+                continue
+    return ImageFont.load_default()
 # ===================== 常量与配置 =====================
 
 _CONV_KERNELS = {
@@ -150,7 +176,7 @@ def draw_heatmap_3x3(patch: np.ndarray, scale: int = 60) -> Image.Image:
     img = Image.new("RGB", (3 * scale, 3 * scale), (255, 255, 255))
     draw = ImageDraw.Draw(img)
     try:
-        font = ImageFont.truetype("arial.ttf", max(10, scale // 4))
+        font = _load_font(max(10, scale // 4))
     except Exception:
         font = ImageFont.load_default()
     for i in range(3):
@@ -171,7 +197,7 @@ def draw_kernel_matrix(kernel: np.ndarray, scale: int = 60) -> Image.Image:
     img = Image.new("RGB", (3 * scale, 3 * scale), (245, 245, 245))
     draw = ImageDraw.Draw(img)
     try:
-        font = ImageFont.truetype("arial.ttf", max(10, scale // 4))
+        font = _load_font(max(10, scale // 4))
     except Exception:
         font = ImageFont.load_default()
     abs_max = max(abs(kernel.min()), abs(kernel.max()), 1e-6)
@@ -202,8 +228,8 @@ def draw_elementwise_product(patch: np.ndarray, kernel: np.ndarray, scale: int =
     img = Image.new("RGB", (3 * scale, 3 * scale + footer_h), (250, 250, 250))
     draw = ImageDraw.Draw(img)
     try:
-        font = ImageFont.truetype("arial.ttf", max(10, scale // 4))
-        font_sum = ImageFont.truetype("arial.ttf", max(11, scale // 4 + 2))
+        font = _load_font(max(10, scale // 4))
+        font_sum = _load_font(max(11, scale // 4 + 2))
     except Exception:
         font = ImageFont.load_default()
         font_sum = font
@@ -396,8 +422,8 @@ def draw_layer_chain() -> Image.Image:
     img = Image.new("RGB", (total_w, total_h), (15, 15, 15))
     draw = ImageDraw.Draw(img)
     try:
-        font = ImageFont.truetype("arial.ttf", 10)
-        font_large = ImageFont.truetype("arial.ttf", 11)
+        font = _load_font(10)
+        font_large = _load_font(11)
     except Exception:
         font = ImageFont.load_default()
         font_large = font

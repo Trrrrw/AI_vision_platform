@@ -553,16 +553,30 @@ def draw_diamond(draw, x, y, size, fill_color, outline_color):
 
 
 def load_font(size, bold=False):
-    preferred = [
-        "C:/Windows/Fonts/msyhbd.ttc" if bold else "C:/Windows/Fonts/msyh.ttc",
+    """跨平台字体加载，优先使用 Linux / Streamlit Cloud 可用的中文字体"""
+    # 候选字体路径（按优先级排序）
+    font_paths = [
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",   # Streamlit Cloud
+        "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
+        "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
+        "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+        "C:/Windows/Fonts/msyh.ttc",                               # Windows
         "C:/Windows/Fonts/simhei.ttf",
         "C:/Windows/Fonts/simsun.ttc",
     ]
-    for path in preferred + FONT_PATHS:
+    if bold:
+        # 粗体优先
+        bold_paths = [
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+            "C:/Windows/Fonts/msyhbd.ttc",
+        ]
+        font_paths = bold_paths + font_paths
+
+    for path in font_paths:
         if os.path.exists(path):
             try:
                 return ImageFont.truetype(path, size=size)
-            except OSError:
+            except Exception:
                 continue
     return ImageFont.load_default()
 
