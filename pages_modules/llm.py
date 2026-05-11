@@ -200,7 +200,10 @@ def show(model_preselected: str = None):
         st.info(f"💡 申请免费 API Key：访问 {intro['website']} 注册即可获取。")
         # st.stop()
         st.markdown("---")
-        st.markdown('<a href="/" target="_self" style="...">🏠 返回首页</a>', ...)
+        if st.button("🏠 返回首页", key="llm_back_home"):
+    st.session_state.current_page = "home"
+    st.rerun()
+st.markdown("---")
         return False  # 直接返回，不执行后面的对话逻辑
 
     client = OpenAI(
