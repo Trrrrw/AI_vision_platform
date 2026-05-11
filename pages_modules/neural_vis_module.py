@@ -21,6 +21,7 @@ import streamlit as st
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib.patches import Circle
 import os
 
 # 直接指定云端和本地都存在的字体路径
