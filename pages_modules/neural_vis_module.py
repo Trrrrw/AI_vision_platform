@@ -19,21 +19,22 @@ import subprocess
 import numpy as np
 import streamlit as st
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.patches import Circle
+import os
 
-# ==================== 兼容 EXE 打包的中文字体设置 ====================
-matplotlib.rcParams["font.sans-serif"] = [
-    "Noto Sans CJK SC",
-    "Noto Sans CJK JP",
-    "WenQuanYi Micro Hei",
-    "SimHei",
-    "Microsoft YaHei",
-    "Arial Unicode MS",
-    "sans-serif"
-]
-matplotlib.rcParams["axes.unicode_minus"] = False
+# 直接指定云端和本地都存在的字体路径
+font_path = '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
+if not os.path.exists(font_path):
+    font_path = 'C:/Windows/Fonts/msyh.ttc'
 
+if os.path.exists(font_path):
+    from matplotlib.font_manager import FontProperties
+    fp = FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = fp.get_name()
+else:
+    plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['axes.unicode_minus'] = False
 
 def resource_path(relative_path):
     """获取资源文件的绝对路径，兼容 PyInstaller 打包后的 exe 环境。"""
